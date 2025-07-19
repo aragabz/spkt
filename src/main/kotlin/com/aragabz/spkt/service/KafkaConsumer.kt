@@ -21,14 +21,14 @@ class KafkaConsumer(
         containerFactory = "userKafkaListenerContainerFactory"
     )
     fun consume(message: String) {
-        logger.info("user: ${message}")
+        logger.info("user: $message")
         logger.info(">> convert string to user object")
         val user = message.toObject<User>(objectMapper)
         logger.info(">> save user to redis")
         redisService.saveValue("myUser", user)
         logger.info(">> get user value from redis")
         val redisUser = redisService.getValue("myUser")
-        logger.info(">> user: ${redisUser}")
+        logger.info(">> user: $redisUser")
 
     }
 }
